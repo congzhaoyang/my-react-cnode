@@ -31,7 +31,7 @@ import { observer, inject } from 'mobx-react'
         console.log(res)
         if (res.data.success) {
           console.log('登录成功')
-          this.props.store.Login(this.state.accessToken, res.data)
+          this.props.store.login(this.state.accessToken, res.data)
           this.props.history.replace('/')
         }
       })

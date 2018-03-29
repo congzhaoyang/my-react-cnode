@@ -8,48 +8,52 @@ class Release extends Component {
     super(props)
 
     this.state = {
-
+      title: '',
+      tab: 'dev',
     }
   }
 
-  initMarkdownEditor = () => {
-    this.simplemde = new SimpleMDE({
-      element: document.getElementById("markdown-editor"),
-      spellChecker: false, 				// 启用拼写检查，会有背景色
-      autoDownloadFontAwesome: false,		// 是否需要下载字体图标
-    });
+  handleTitleChange = e => {
+    this.setState({
+      title: e.target.value.trim()
+    })
   }
 
-  componentDidMount () {
-    this.initMarkdownEditor()
+  handleTabChange = value => {
+    this.setState({
+      tab: value
+    })
   }
 
   render() {
     return (
       <section className="release-page">
-        <span>选择板块</span>
+        <p>发新帖</p>
+        {/* <span>选择板块</span>
         <Select
           showSearch
           style={{ width: 200 }}
           placeholder="请选择"
           optionFilterProp="children"
-          // onChange={handleChange}
-          // onFocus={handleFocus}
-          // onBlur={handleBlur}
-          // filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+          onSelect={this.handleTabChange}
+          value={this.state.tab}
+        // onChange={handleChange}
+        // onFocus={handleFocus}
+        // onBlur={handleBlur}
+        // filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
         >
           <Option value="分享">分享</Option>
           <Option value="回答">回答</Option>
           <Option value="招聘">招聘</Option>
           <Option value="客户端测试">客户端测试</Option>
         </Select>
-        <Input placeholder="标题字数 10字以上" />
+        <Input placeholder="标题字数 10字以上" value={this.state.title} onChange={this.handleTitleChange} />
         <div className="editor">
           <textarea id="markdown-editor"></textarea>
           <div className="release-btn">
             <button onClick={this.releaseTopics}>{this.currentStatus ? '发布' : '更新'}</button>
           </div>
-        </div>
+        </div> */}
       </section>
     )
   }
