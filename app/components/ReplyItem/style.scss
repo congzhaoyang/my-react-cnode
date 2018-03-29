@@ -1,0 +1,19 @@
+.reply-content {
+  border-top: 1px solid #ddd;
+  min-height: 100px;
+  overflow: hidden;
+  .author {
+    float: left;
+    .avatar {
+      background: url('../../../static/images/default-avatar.svg') no-repeat;
+      background-size: cover;
+      img {
+        height: 80px;
+        width: 80px;
+      }
+    }
+  }
+  .content {
+    margin-left: 100px;
+  }
+}

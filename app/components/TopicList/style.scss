@@ -1,0 +1,29 @@
+
+.list-item {
+  border-bottom: 1px solid #DDD;
+  list-style-type: none;
+  overflow: hidden;
+  .author {
+    height: 120px;
+    max-width: 80px;
+    float: left;
+    .avatar-wrap {
+      .avatar {
+        // border-radius: 50%;
+        background: url('../../../static/images/default-avatar.svg') no-repeat;
+        background-size: cover;
+        width: 80px;
+        height: 80px;
+      }
+    }
+    .name {
+
+    }
+  }
+  .content {
+    margin-left: 120px;
+    .title {
+      display: inline-block;
+    }
+  }
+}
