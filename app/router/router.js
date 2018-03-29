@@ -1,12 +1,14 @@
 import React from 'react'
-import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route, Lifecycle } from 'react-router-dom'
 import HomePage from '../view/index'
 import TopicPage from '../view/topic'
 import Release from '../view/release'
 import Login from '../view/login'
+import { observer, inject } from 'mobx-react'
 
-
+// @inject(stores => stores)
 const Routes = () => {
+
   return (
     <Router>
       <div className="router-view">

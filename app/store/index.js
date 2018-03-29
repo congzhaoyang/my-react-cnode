@@ -16,8 +16,10 @@ class Store {
   // @actions: 改变状态的动作
   @action login(accessToken, userInfo) {
     window.localStorage.setItem('access_token', accessToken)
+    console.log(this.accessToken)
     this.userInfo = userInfo
     this.isLogin = true
+    this.fetchMessageCount()
   }
 
   @action logout() {
@@ -27,14 +29,27 @@ class Store {
   }
 
   @action fetchMessageCount() {
-    axios.get(API_CONFIG.messageCount)
+    console.log(this.accessToken);
+
+    axios.get(`${API_CONFIG.messageCount}?accesstoken=${this.accessToken}`)
       .then(res => {
         console.log(res)
+        console.log(this.accessToken)
       })
       .catch(err => {
         console.error(err)
       })
   }
+
+  // @action fetchMessageCount() {
+  //   axios.get(API_CONFIG.messageCount)
+  //     .then(res => {
+  //       if (res.data.success) {
+  //         this.messageCount = res.data.data;
+  //       }
+  //     })
+  //     .catch(e => e);
+  // }
 }
 
 export default Store

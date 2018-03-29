@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Icon, Input, Button } from 'antd'
 import axios from 'axios'
+import { Lifecycle } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 // import WrappedNormalLoginForm from '../../components/LoginBar'
 
@@ -11,6 +12,13 @@ import { observer, inject } from 'mobx-react'
 
     this.state = {
       accessToken: window.localStorage.access_token || '',
+    }
+  }
+
+  routerWillLeave(nextLocation) {
+    console.log(this.props.store.isLogin)
+    if (!this.props.store.isLogin) {
+      return false;
     }
   }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, Lifecycle } from 'react-router-dom'
 import TopicList from '../../components/TopicList'
 import { querystring } from '../../utils/queryString'
 import { observer, inject } from 'mobx-react'
@@ -17,6 +17,10 @@ import './style.scss'
       page: 1,
       total: 9999,
     }
+  }
+
+  routerWillLeave(nextLocation) {
+    alert('a')
   }
 
   fetchTopicData() {
