@@ -1,4 +1,5 @@
 import { observable, action } from 'mobx'
+import axios from 'axios'
 import API_CONFIG from '../api'
 
 // @observable: 观测谁
@@ -17,6 +18,22 @@ class Store {
     window.localStorage.setItem('access_token', accessToken)
     this.userInfo = userInfo
     this.isLogin = true
+  }
+
+  @action logout() {
+    window.localStorage.removeItem('access_token')
+    this.accessToken = ''
+    this.isLogin = false
+  }
+
+  @action fetchMessageCount() {
+    axios.get(API_CONFIG.messageCount)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.error(err)
+      })
   }
 }
 

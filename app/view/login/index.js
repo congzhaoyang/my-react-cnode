@@ -56,7 +56,7 @@ import { observer, inject } from 'mobx-react'
           placeholder="Access Token"
           onChange={this.handleChange.bind(this)}
         ></input>
-        <span onClick={this.handleSubmit}>登录</span>
+        <span onClick={this.handleSubmit}>{this.props.store.isLogin ? '退出' : '登录'}</span>
       </section>
     )
   }
