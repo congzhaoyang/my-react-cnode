@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { Form, Icon, Input, Button } from 'antd'
 import axios from 'axios'
 import { observer, inject } from 'mobx-react'
-import WrappedNormalLoginForm from '../../components/LoginBar'
+// import WrappedNormalLoginForm from '../../components/LoginBar'
 
 @inject(stores => stores)
-class Login extends Component {
+@observer class Login extends Component {
   constructor(props) {
     super(props)
 
@@ -21,7 +21,8 @@ class Login extends Component {
     })
   }
 
-  handleSubmit() {
+  handleSubmit = () => {
+    console.log(this)
     console.log(this.state.accessToken)
     axios.post('https://cnodejs.org/api/v1/accesstoken', {
       accesstoken: this.state.accessToken
@@ -46,8 +47,16 @@ class Login extends Component {
   render() {
     return (
       <section>
-        <span>登录</span>
-        <WrappedNormalLoginForm handleChange={this.handleChange.bind(this)} handleSubmit={this.handleSubmit.bind(this)}></WrappedNormalLoginForm>
+        <p>登录页面</p>
+        {/* <WrappedNormalLoginForm handleChange={this.handleChange.bind(this)} handleSubmit={this.handleSubmit.bind(this)}></WrappedNormalLoginForm> */}
+        <input
+          type="text"
+          maxLength="50"
+          value={this.state.accessToken}
+          placeholder="Access Token"
+          onChange={this.handleChange.bind(this)}
+        ></input>
+        <span onClick={this.handleSubmit}>登录</span>
       </section>
     )
   }

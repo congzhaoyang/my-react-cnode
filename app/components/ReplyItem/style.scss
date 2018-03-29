@@ -4,6 +4,7 @@
   overflow: hidden;
   .author {
     float: left;
+    max-width: 80px;
     .avatar {
       background: url('../../../static/images/default-avatar.svg') no-repeat;
       background-size: cover;
