@@ -1,7 +1,12 @@
 .reply-content {
   border-top: 1px solid #ddd;
   min-height: 100px;
+  max-width: 980px;
   overflow: hidden;
+  background: #FFFFFF;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.30);
+  border-radius: 4px;
+  margin: 20px auto;
   .author {
     float: left;
     max-width: 80px;

@@ -2,10 +2,13 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Pagination } from 'antd'
 import axios from 'axios'
+import { observer, inject } from 'mobx-react'
+import SimpleMDE from 'simplemde'
 import ReplyItem from '../../components/ReplyItem'
 
-class TopicPage extends Component {
-  constructor (props) {
+@inject(stores => stores)
+@observer class TopicPage extends Component {
+  constructor(props) {
     super(props)
     this.state = {
       data: {
@@ -32,6 +35,7 @@ class TopicPage extends Component {
 
   componentDidMount() {
     this.fetchTopicData()
+    this.initMarkdownEditor();
   }
 
   fetchTopicData() {
@@ -56,8 +60,16 @@ class TopicPage extends Component {
       })
   }
 
+  // 初始化markdown编辑器
+  initMarkdownEditor = () => {
+    this.simplemde = new SimpleMDE({
+      element: document.getElementById("markdown-editor"),
+      spellChecker: false, 				// 启用拼写检查，会有背景色
+      autoDownloadFontAwesome: false,		// 是否需要下载字体图标
+    });
+  }
 
-  render () {
+  render() {
     let data = this.state.data
 
     return (
@@ -66,7 +78,7 @@ class TopicPage extends Component {
         <h1>{data.title}</h1>
         <div className="author">
           <div className="avatar">
-            <img src={data.author.avatar_url}/>
+            <img src={data.author.avatar_url} />
           </div>
           <span>{data.author.loginname}</span>
         </div>
@@ -74,10 +86,17 @@ class TopicPage extends Component {
         {
           data.replies.map((item, index) => {
             return (
-              <ReplyItem data={ item } index = { index } key={index}/>
+              <ReplyItem data={item} index={index} key={index} />
             )
           })
         }
+        <div className="insert-reply" style={{ display: !this.props.store.isLogin ? 'none' : '' }}>
+          <div className="tip">添加回复</div>
+          <textarea id="markdown-editor"></textarea>
+          <div className="reply-btn">
+            <button type="button" onClick={this.insertReply}>{this.insertBtnText}</button>
+          </div>
+        </div>
       </section>
     )
   }

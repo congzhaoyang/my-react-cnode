@@ -1,8 +1,15 @@
 
 .list-item {
-  border-bottom: 1px solid #DDD;
+  // border-bottom: 1px solid #DDD;
   list-style-type: none;
   overflow: hidden;
+  background: #FFFFFF;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.30);
+  border-radius: 4px;
+  margin: 20px auto;
+  max-width: 980px;
+  position: relative;
+
   .author {
     height: 120px;
     max-width: 80px;
@@ -25,5 +32,20 @@
     .title {
       display: inline-block;
     }
+  }
+
+  .reply-count {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #E12F24;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    color: #FFF;
+    font-size: 12px;
+    text-align: center;
+    line-height: 20px;
   }
 }
