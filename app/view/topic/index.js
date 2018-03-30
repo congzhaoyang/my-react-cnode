@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Pagination } from 'antd'
+import { Pagination, Button, Radio, Icon, message } from 'antd'
 import axios from 'axios'
 import { observer, inject } from 'mobx-react'
 import SimpleMDE from 'simplemde'
 import API_CONFIG from '../../api'
 import '../../../node_modules/simplemde/dist/simplemde.min.css'
 import ReplyItem from '../../components/ReplyItem'
+import './style.scss'
 
 @inject(stores => stores)
 @observer class TopicPage extends Component {
@@ -81,13 +82,64 @@ import ReplyItem from '../../components/ReplyItem'
       })
         .then(res => {
           console.log(res)
-          if(res.data.success) {
+          if (res.data.success) {
+            this.fetchTopicData()
             alert('回复成功')
           }
         })
         .catch(err => {
           console.error(err)
         })
+    }
+  }
+
+  handleCollect = () => {
+    if (this.props.store.isLogin) {
+      if (!this.state.data.is_collect) { // 未被收藏的帖子
+        axios.post(API_CONFIG.collection, {
+          accesstoken: this.props.store.accessToken,
+          topic_id: this.state.data.id,
+        })
+          .then(res => {
+            console.log(res)
+            if (res.data.success) {
+              message.info('收藏成功')
+              this.setState({
+                data: {
+                  is_collect: true,
+                }
+              })
+            } else {
+              message.info('收藏失败')
+            }
+          })
+          .catch(err => {
+            console.error(err)
+          })
+      } else { // 已被收藏的帖子
+        axios.post(API_CONFIG.cancelCollection, {
+          accesstoken: this.props.store.accessToken,
+          topic_id: this.state.data.id,
+        })
+          .then(res => {
+            console.log(res)
+            if (res.data.success) {
+              message.info('取消收藏成功')
+              this.setState({
+                data: {
+                  is_collect: false,
+                }
+              })
+            } else {
+              message.info('取消收藏失败')
+            }
+          })
+          .catch(err => {
+            console.error(err)
+          })
+      }
+    } else {
+      message.info('请登录')
     }
   }
 
@@ -105,6 +157,7 @@ import ReplyItem from '../../components/ReplyItem'
           <span>{data.author.loginname}</span>
         </div>
         <div className="content" dangerouslySetInnerHTML={{ __html: data.content }} />
+        <Button type="primary" onClick={this.handleCollect}>{data.is_collect ? '取消收藏' : '收藏'}</Button>
         {
           data.replies.map((item, index) => {
             return (
@@ -116,7 +169,8 @@ import ReplyItem from '../../components/ReplyItem'
           <div className="tip">添加回复</div>
           <textarea id="markdown-editor"></textarea>
           <div className="reply-btn">
-            <button type="button" onClick={this.insertReply}>{this.insertBtnText}回帖</button>
+            {/* <button type="button" onClick={this.insertReply}>{this.insertBtnText}回帖</button> */}
+            <Button type="primary" onClick={this.insertReply}>{this.insertBtnText}回帖</Button>
           </div>
         </div>
       </section>

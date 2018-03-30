@@ -41,15 +41,24 @@ class Store {
       })
   }
 
-  // @action fetchMessageCount() {
-  //   axios.get(API_CONFIG.messageCount)
-  //     .then(res => {
-  //       if (res.data.success) {
-  //         this.messageCount = res.data.data;
-  //       }
-  //     })
-  //     .catch(e => e);
-  // }
+  @action checkLogin() {
+    if (this.accessToken) {
+      axios.post(API_CONFIG.login, {
+        accesstoken: this.accessToken,
+      })
+        .then(res => {
+          console.log(res)
+          if (res.data.success) {
+            this.isLogin = true
+            this.userInfo = res.data
+          }
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    }
+  }
+
 }
 
 export default Store

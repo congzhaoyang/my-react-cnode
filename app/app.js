@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 import Routes from './router'
+import { observer, inject } from 'mobx-react'
 
+@inject(stores => stores)
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {}
+  }
+
+  componentDidMount() {
+    this.props.store.checkLogin()
   }
 
   render() {
@@ -15,11 +21,6 @@ class App extends Component {
         <div className={`progress${startClass}${endClass}`}>
           <div className="rotate-loading"></div>
           <div className="progress-forward"></div>
-        </div>
-        <div className="go-top user-select-none" onClick={this._goTop}>
-          <p>回</p>
-          <p>顶</p>
-          <p>部</p>
         </div>
         <Routes />
       </div>
