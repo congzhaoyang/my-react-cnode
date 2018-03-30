@@ -12,7 +12,7 @@ class ReplyItem extends Component {
   }
 
   componentDidMount() {
-    this.initMarkdownEditor()
+    // this.initMarkdownEditor()
   }
 
   // 初始化markdown编辑器

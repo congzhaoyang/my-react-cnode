@@ -4,6 +4,8 @@ import { Pagination } from 'antd'
 import axios from 'axios'
 import { observer, inject } from 'mobx-react'
 import SimpleMDE from 'simplemde'
+import API_CONFIG from '../../api'
+import '../../../node_modules/simplemde/dist/simplemde.min.css'
 import ReplyItem from '../../components/ReplyItem'
 
 @inject(stores => stores)
@@ -49,6 +51,7 @@ import ReplyItem from '../../components/ReplyItem'
     })
       .then(res => {
         if (res.data.success) {
+          console.log(res.data)
           this.setState({
             data: res.data.data
           }, () => {
@@ -67,6 +70,25 @@ import ReplyItem from '../../components/ReplyItem'
       spellChecker: false, 				// 启用拼写检查，会有背景色
       autoDownloadFontAwesome: false,		// 是否需要下载字体图标
     });
+  }
+
+  insertReply = () => {
+    if (this.props.store.isLogin) {
+      axios.post(`https://cnodejs.org/api/v1/topic/${this.state.data.id}/replies`, {
+        accesstoken: this.props.store.accessToken,
+        content: this.simplemde.value(),
+        reply_id: ''
+      })
+        .then(res => {
+          console.log(res)
+          if(res.data.success) {
+            alert('回复成功')
+          }
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    }
   }
 
   render() {
@@ -94,7 +116,7 @@ import ReplyItem from '../../components/ReplyItem'
           <div className="tip">添加回复</div>
           <textarea id="markdown-editor"></textarea>
           <div className="reply-btn">
-            <button type="button" onClick={this.insertReply}>{this.insertBtnText}</button>
+            <button type="button" onClick={this.insertReply}>{this.insertBtnText}回帖</button>
           </div>
         </div>
       </section>
