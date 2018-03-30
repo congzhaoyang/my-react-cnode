@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import classNames from 'classnames'
 import './style.scss'
 
 class TopicList extends Component {
@@ -18,13 +19,17 @@ class TopicList extends Component {
   render() {
     return (
       this.props.data.map((item, index) => {
+        let replyCountClass = classNames({
+          'reply-count': true,
+          'disable': item.reply_count === 0
+        })
         return (
-          <li key={index} className="list-item">
+          <li key={index} className="list-item" >
             <div className="author">
               <div className="avatar-wrap">
                 <img src={item.author.avatar_url} className="avatar" />
               </div>
-              <span className="name">{item.author.loginname}</span>
+              <p className="name">{item.author.loginname}</p>
             </div>
             <div className="content">
               <Link className="title" to={`/topic/${item.id}`}><h2>{item.title}</h2></Link>
@@ -33,8 +38,8 @@ class TopicList extends Component {
                 <span>浏览: {item.visit_count}</span>
               </div>
             </div>
-            <span className="reply-count">{item.reply_count}</span>
-          </li>
+            <span className={replyCountClass}>{item.reply_count}</span>
+          </li >
         )
       })
     )
