@@ -33,10 +33,13 @@ class ReplyItem extends Component {
           <div className="avatar">
             <img src={data.author.avatar_url} />
           </div>
-          <span>{data.author.loginname}</span>
-          <span>{index + 1}楼</span>
+          <p className="login-name">{data.author.loginname}</p>
         </div>
-        <div className="content" dangerouslySetInnerHTML={{ __html: data.content }} />
+        <div className="content-wrap">
+          <span className="floor">{index + 1}楼</span>
+          <span className="reply-time">一天前</span>
+          <div className="content" dangerouslySetInnerHTML={{ __html: data.content }} />
+        </div>
       </section>
     )
   }
