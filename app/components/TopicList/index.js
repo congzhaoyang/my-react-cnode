@@ -16,6 +16,16 @@ class TopicList extends Component {
 
   }
 
+  gotoPersonalPage(loginname, event) {
+    // event.stopPropagation()
+    let url = window.location.href + `user/${loginname}`
+    console.log(url)
+    event.preventDefault()
+    console.log(1);
+    window.location.href = url
+    console.log(2);
+  }
+
   render() {
     return (
       this.props.data.map((item, index) => {
@@ -23,23 +33,26 @@ class TopicList extends Component {
           'reply-count': true,
           'disable': item.reply_count === 0
         })
+        let loginname = item.author.loginname
         return (
-          <li key={index} className="list-item" >
-            <div className="author">
-              <div className="avatar-wrap">
-                <img src={item.author.avatar_url} className="avatar" />
+          <Link to={`/topic/${item.id}`} key={index} >
+            <li className="list-item" >
+              <div className="author" onClick={this.gotoPersonalPage.bind(this, loginname)}>
+                <div className="avatar-wrap">
+                  <img src={item.author.avatar_url} className="avatar" />
+                </div>
+                <p className="name">{item.author.loginname}</p>
               </div>
-              <p className="name">{item.author.loginname}</p>
-            </div>
-            <div className="content">
-              <Link className="title" to={`/topic/${item.id}`}><h2>{item.title}</h2></Link>
-              <div>
-                {/* <span>1 小时前</span> */}
-                <span>浏览: {item.visit_count}</span>
+              <div className="content">
+                <h2>{item.title}</h2>
+                <div>
+                  {/* <span>1 小时前</span> */}
+                  <span>浏览: {item.visit_count}</span>
+                </div>
               </div>
-            </div>
-            <span className={replyCountClass}>{item.reply_count}</span>
-          </li >
+              <span className={replyCountClass}>{item.reply_count}</span>
+            </li >
+          </Link >
         )
       })
     )

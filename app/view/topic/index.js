@@ -104,11 +104,12 @@ import './style.scss'
             console.log(res)
             if (res.data.success) {
               message.info('收藏成功')
-              this.setState({
-                data: {
-                  is_collect: true,
-                }
-              })
+              // this.setState({
+              //   data: {
+              //     is_collect: true,
+              //   }
+              // })
+              this.setState(Object.assign({}, this.state.data, { is_collect: true }))
             } else {
               message.info('收藏失败')
             }
@@ -125,11 +126,13 @@ import './style.scss'
             console.log(res)
             if (res.data.success) {
               message.info('取消收藏成功')
-              this.setState({
-                data: {
-                  is_collect: false,
-                }
-              })
+              // this.setState({
+              //   data: {
+              //     is_collect: false,
+              //   }
+              //   // data[is_collect] = false
+              // })
+              this.setState(Object.assign({}, this.state.data, { is_collect: false }))
             } else {
               message.info('取消收藏失败')
             }
