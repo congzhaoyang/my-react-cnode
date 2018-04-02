@@ -50,12 +50,23 @@ class MessageBox extends Component {
   }
 
   render() {
-    // const { data }= this.state
+    let { has_read_messages: hasReadMessages, hasnot_read_messages: hasnotReadMessages } = this.state.data
+    console.log(this.state.data, hasReadMessages, hasnotReadMessages);
+
     // if (data.) 
     return (
       <div>
+        <h3>未读消息</h3>
         {
-          this.state.data.has_read_messages.map((item, index) => {
+          hasnotReadMessages && hasnotReadMessages.map((item, index) => {
+            return (
+              <MessageItem data={item} key={index}></MessageItem>
+            )
+          })
+        }
+        <h3>已读消息</h3>
+        {
+          hasReadMessages && hasReadMessages.map((item, index) => {
             return (
               <MessageItem data={item} key={index}></MessageItem>
             )
