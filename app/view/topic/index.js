@@ -95,7 +95,9 @@ import './style.scss'
 
   handleCollect = () => {
     if (this.props.store.isLogin) {
+      console.log(this.state.data.is_collect)
       if (!this.state.data.is_collect) { // 未被收藏的帖子
+        console.log('走未被收藏');
         axios.post(API_CONFIG.collection, {
           accesstoken: this.props.store.accessToken,
           topic_id: this.state.data.id,
@@ -109,7 +111,10 @@ import './style.scss'
               //     is_collect: true,
               //   }
               // })
-              this.setState(Object.assign({}, this.state.data, { is_collect: true }))
+              let data = Object.assign({}, this.state.data, { is_collect: true })
+              this.setState({
+                data: data
+              })
             } else {
               message.info('收藏失败')
             }
@@ -118,6 +123,7 @@ import './style.scss'
             console.error(err)
           })
       } else { // 已被收藏的帖子
+        console.log('走已收藏');
         axios.post(API_CONFIG.cancelCollection, {
           accesstoken: this.props.store.accessToken,
           topic_id: this.state.data.id,
@@ -132,7 +138,11 @@ import './style.scss'
               //   }
               //   // data[is_collect] = false
               // })
-              this.setState(Object.assign({}, this.state.data, { is_collect: false }))
+              // this.setState(Object.assign({}, this.state.data, { is_collect: false }))
+              let data = Object.assign({}, this.state.data, { is_collect: false })
+              this.setState({
+                data: data
+              })
             } else {
               message.info('取消收藏失败')
             }
