@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react'
 import Routes from './router'
 import { observer, inject } from 'mobx-react'

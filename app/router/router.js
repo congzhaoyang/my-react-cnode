@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react'
 import { HashRouter as Router, Switch, Route, Lifecycle } from 'react-router-dom'
 import HomePage from '../view/index'

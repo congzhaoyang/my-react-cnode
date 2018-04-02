@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { observable, action } from 'mobx'
 import axios from 'axios'
 import API_CONFIG from '../api'

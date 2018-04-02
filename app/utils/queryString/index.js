@@ -1,4 +1,5 @@
-export function querystring (search) {
+/* eslint-disable */
+export function querystring(search) {
   if (search.length === 0) { return search }
   var query = {};
   var slice = search.replace('?', '');
