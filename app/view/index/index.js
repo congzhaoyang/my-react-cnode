@@ -74,6 +74,7 @@ import './style.scss'
       <div className="page">
         <Link to="/release">发帖</Link>
         <Link to="/login">{this.props.store.isLogin ? '退出' : '登录'}</Link>
+        <Link to="/message">消息中心</Link>
         <nav className="nav">
           <NavLink to="/">全部</NavLink>
           <NavLink to="/?tab=good">精华</NavLink>

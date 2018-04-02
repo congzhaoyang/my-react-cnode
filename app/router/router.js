@@ -4,6 +4,8 @@ import HomePage from '../view/index'
 import TopicPage from '../view/topic'
 import Release from '../view/release'
 import Login from '../view/login'
+import Message from '../view/Message'
+import PersonalPage from '../view/personalPage'
 import { observer, inject } from 'mobx-react'
 
 // @inject(stores => stores)
@@ -18,6 +20,8 @@ const Routes = () => {
           <Route path="/topic/:id" component={TopicPage} />
           <Route path="/release" component={Release} />
           <Route path="/login" component={Login} />
+          <Route path="/message" component={Message} />
+          <Route path="/user/:id" component={PersonalPage} />
           {/* <Route path="/login" component={Login} />
           <Route path="/topic/:id" component={Topic} />
           <Route path="/messages/" component={Messages} />
